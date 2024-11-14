@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .item-input {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .item-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .item-input button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      background-color: #28a745;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      background-color: #fff;
+    }
+    .purchased {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .actions button {
+      margin-left: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    .actions .mark-btn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .actions .remove-btn {
+      background-color: #dc3545;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Shopping Tracker</h1>
+    <div class="item-input">
+      <input type="text" id="item-input" placeholder="Enter an item">
+      <button onclick="addItem()">Add</button>
+    </div>
+    <ul id="shopping-list"></ul>
+  </div>
+
+  <script>
+    // Add a new item to the list
+    function addItem() {
+      const itemInput = document.getElementById("item-input");
+      const itemName = itemInput.value.trim();
+      if (itemName === "") {
+        alert("Please enter an item name.");
+        return;
+      }
+
+      // Create list item
+      const li = document.createElement("li");
+
+      // Item name element
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = itemName;
+      li.appendChild(nameSpan);
+
+      // Action buttons
+      const actionsDiv = document.createElement("div");
+      actionsDiv.className = "actions";
+
+      // Mark as purchased button
+      const markBtn = document.createElement("button");
+      markBtn.className = "mark-btn";
+      markBtn.textContent = "Purchased";
+      markBtn.onclick = () => markAsPurchased(li, nameSpan);
+      actionsDiv.appendChild(markBtn);
+
+      // Remove button
+      const removeBtn = document.createElement("button");
+      removeBtn.className = "remove-btn";
+      removeBtn.textContent = "Remove";
+      removeBtn.onclick = () => removeItem(li);
+      actionsDiv.appendChild(removeBtn);
+
+      li.appendChild(actionsDiv);
+
+      // Add the item to the list
+      document.getElementById("shopping-list").appendChild(li);
+      itemInput.value = "";
+    }
+
+    // Mark item as purchased
+    function markAsPurchased(li, nameSpan) {
+      nameSpan.classList.toggle("purchased");
+    }
+
+    // Remove an item from the list
+    function removeItem(li) {
+      li.remove();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link href="../src/input.css" rel="stylesheet">
+    <style rel="stylesheet" src="../src/input.css"></style>
+</head>
+<body>
+    <header class="relative bg-white">
+        <p class="flex h-10 items-center justify-center bg-teal-800 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">Get free delivery on orders over $100</p>
+       <nav class="bg-teal-900">
+         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+           <div class="relative flex h-16 items-center justify-between">
+             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+             <button
+               type="button"
+               class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+               aria-controls="mobile-menu"
+               aria-expanded="false"
+               onclick="toggleMenu()"
+               id="mobile-menu-button"
+             >
+               <span class="absolute -inset-0.5"></span>
+               <span class="sr-only">Open main menu</span>
+               <!-- Icon when menu is closed -->
+               <svg
+                 class="block h-6 w-6"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 aria-hidden="true"
+               >
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+               </svg>
+               <!-- Icon when menu is open -->
+               <svg
+                 class="hidden h-6 w-6"
+                 fill="none"
+                 viewBox="0 0 0 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 aria-hidden="true"
+               >
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+               </svg>
+             </button>
+             </div>
+             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+               <div class="flex shrink-0 items-center">
+                 <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Jaywon Wears">
+               </div>              
+               <div class="hidden sm:ml-6 sm:block">
+                 <div class="flex space-x-4">                                        
+                   <a href="../pages/Store.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Stores</a>
+                   <a href="../pages/orders.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Orders</a>
+                   <a href="../pages/tracking.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Track package</a>
+                   <a href="../pages/Team.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
+                   <a href="../pages/checkout.html" class="group -m-2 flex items-center p-2">
+                     <!-- Cart icon -->
+                     <img src="../images/icons/cart-icon.png" alt="Cart" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
+                     
+                     <!-- Item count -->
+                     <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                     <span class="sr-only">items in cart, view bag</span>
+                   </a>
+                   
+                     <!-- Search Button -->
+                     <a href="#" class="p-2 text-gray-400 hover:text-gray-500" onclick="toggleSearch()">
+                       <span class="sr-only">Search</span>
+                       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                       </svg>
+                     </a>
+ 
+                     <!-- Search Form (hidden by default) -->
+                     <div id="search-container" class="hidden">
+                       <input type="text" id="search-input" class="p-2 border rounded" placeholder="Search..." onkeyup="searchFunction(event)">
+                     </div>                     
+                 </div>
+               </div>
+             </div>
+             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">             
+               <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" onclick="toggleNotifications()">
+                 <span class="absolute -inset-1.5"></span>
+                 <span class="sr-only">View notifications</span>
+                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                 </svg>
+               </button>
+               <!-- Notification Dropdown Panel -->
+               <div id="notificationPanel" class="hidden absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md p-4">
+                 <p class="text-gray-700">You have new notifications!</p>
+               </div>
+                             
+               <!-- Profile dropdown -->
+             <div class="relative ml-3">
+               <div>
+                 <button
+                   type="button"
+                   class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                   id="user-menu-button"
+                   aria-expanded="false"
+                   aria-haspopup="true"
+                   onclick="toggleDropdown()"
+                 >
+                   <span class="absolute -inset-1.5"></span>
+                   <span class="sr-only">Open user menu</span>
+                   <img
+                     class="h-8 w-8 rounded-full"
+                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                     alt=""
+                   />
+                 </button>
+               </div>
+ 
+               <!-- Dropdown menu -->
+               <div
+                 id="dropdown-menu"
+                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                 role="menu"
+                 aria-orientation="vertical"
+                 aria-labelledby="user-menu-button"
+                 tabindex="-1"
+               >
+                 <a
+                   href="#"
+                   class="block px-4 py-2 text-sm text-gray-700"
+                   role="menuitem"
+                   tabindex="-1"
+                   id="user-menu-item-0"
+                 >Your Profile</a>
+                 <a
+                   href="#"
+                   class="block px-4 py-2 text-sm text-gray-700"
+                   role="menuitem"
+                   tabindex="-1"
+                   id="user-menu-item-1"
+                 >Settings</a>
+                 <a
+                   href="#"
+                   class="block px-4 py-2 text-sm text-gray-700"
+                   role="menuitem"
+                   tabindex="-1"
+                   id="user-menu-item-2"
+                 >Sign out</a>
+               </div>
+             </div>
+             </div>
+           </div>
+         </div>
+       
+         <!-- Mobile menu, show/hide based on menu state. -->
+         <div class="sm:hidden" id="mobile-menu">
+           <div class="space-y-1 px-2 pb-3 pt-2">
+              <!-- Search Button -->
+              <a href="#" class="p-2 text-gray-400 hover:text-gray-500" onclick="toggleSearch()">
+               <span class="sr-only">Search</span>
+               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+               </svg>
+             </a>
+             <!-- Search Form (hidden by default) -->
+             <div id="search-container" class="hidden">
+               <input type="text" id="search-input" class="p-2 border rounded" placeholder="Search..." onkeyup="searchFunction(event)">
+             </div>
+             <a href="../pages/Store.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Stores</a>
+                   <a href="../pages/orders.html" class=" block rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Orders</a>
+                   <a href="../pages/tracking.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Track package</a>
+                   <a href="../pages/Team.html" class=" block rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
+                   <a href="../pages/checkout.html" class="group -m-2 flex items-center p-2">
+                     <!-- Cart icon -->
+                     <img src="../images/icons/cart-icon.png" alt="Cart" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
+                     
+                     <!-- Item count -->
+                     <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                     <span class="sr-only">items in cart, view bag</span>
+                   </a>                                      
+           </div>
+         </div>
+       </nav>
+     </header>
+     
+  <div class="bg-white">
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <h2 class="sr-only">Products</h2>
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        <!-- Product 1 -->
+        <a href="#" class="group" onclick="openModal('Earthen Bottle', 48)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-01.jpg" alt="Earthen Bottle" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
+        </a>
+        
+        <!-- Product 2 -->
+        <a href="#" class="group" onclick="openModal('Porcelain Mug', 35)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-02.jpg" alt="Porcelain Mug" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Porcelain Mug</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+        </a>
+
+        <!-- Product 3 -->
+        <a href="#" class="group" onclick="openModal('Leather Wallet', 80)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-03.jpg" alt="Leather Wallet" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Leather Wallet</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$80</p>
+        </a>
+
+        <!-- Product 4 -->
+        <a href="#" class="group" onclick="openModal('Handmade Pottery', 120)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-04.jpg" alt="Handmade Pottery" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Handmade Pottery</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$120</p>
+        </a>
+
+        <!-- Product 5 -->
+        <a href="#" class="group" onclick="openModal('Canvas Tote Bag', 45)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-05.jpg" alt="Canvas Tote Bag" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Canvas Tote Bag</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$45</p>
+        </a>
+
+        <!-- Product 6 -->
+        <a href="#" class="group" onclick="openModal('Ceramic Vase', 75)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-06.jpg" alt="Ceramic Vase" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Ceramic Vase</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$75</p>
+        </a>
+
+        <!-- Product 7 -->
+        <a href="#" class="group" onclick="openModal('Wooden Table Lamp', 90)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-07.jpg" alt="Wooden Table Lamp" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Wooden Table Lamp</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$90</p>
+        </a>
+
+        <!-- Product 8 -->
+        <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+            <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-08.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Silk Scarf</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$60</p>
+        </a>
+
+         <!-- Product 9 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-quick-preview-02-detail.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Silk Scarf</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$60</p>
+            </a>
+
+             <!-- Product 10 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/athletic-cotton-socks-6-pairs.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Athletic Cotton Socks</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$70</p>
+            </a>
+
+             <!-- Product 11 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/intermediate-composite-basketball.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700"> Basketballf</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$60</p>
+            </a>
+
+             <!-- Product 12 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Plain Cotton T-Shirt</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$70</p>
+            </a>
+
+             <!-- Product 13 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/black-2-slot-toaster.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Toaster </h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$40</p>
+            </a>
+
+             <!-- Product 14 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/6-piece-white-dinner-plate-set.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">White Dinner Plate Set</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$60</p>
+            </a>
+
+             <!-- Product 15-->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/6-piece-non-stick-baking-set.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Carbon Steel Oven Bakeware Baking Set</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$80</p>
+            </a>
+
+             <!-- Product 16-->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/plain-hooded-fleece-sweatshirt-yellow.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Plain Hooded Fleece Sweatshirt</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$65</p>
+            </a>
+
+             <!-- Product 17 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/luxury-tower-set-6-piece.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Luxury Towel Set</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$68</p>
+            </a>
+
+             <!-- Product 18-->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/liquid-laundry-detergent-plain.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Liquid Laundry Detergent</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$87</p>
+            </a>
+
+             <!-- Product 19 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/knit-athletic-sneakers-gray.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Waterproof Knit Athletic Sneakers</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$56</p>
+            </a>
+
+             <!-- Product 20 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/women-chiffon-beachwear-coverup-black.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Women's Chiffon Beachwear Cover Up</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$60</p>
+            </a>
+
+             <!-- Product 21 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/round-sunglasses-black.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Round Sunglasses</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$24</p>
+            </a>
+
+             <!-- Product 22 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/women-beach-sandals.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Women's Two Strap Buckle Sandals - Tan</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$62</p>
+            </a>
+
+             <!-- Product 23 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/blackout-curtain-set-beige.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Blackout Curtains Set 4-Pack - Beige</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$36</p>
+            </a>
+
+             <!-- Product 24 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/men-slim-fit-summer-shorts-gray.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Men's Slim-Fit Summer Shorts</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$47</p>
+            </a>
+
+             <!-- Product 25 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/electric-glass-and-steel-hot-water-kettle.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Electric Glass and Steel Hot Tea Water Kettle - 1.7-Liter</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$25</p>
+            </a>
+
+             <!-- Product 26 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/facial-tissue-2-ply-18-boxes.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Ultra Soft Tissue</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$93</p>
+            </a>
+
+             <!-- Product 27 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/straw-sunhat.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Straw Lifeguard Sun Hat</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$39</p>
+            </a>
+
+             <!-- Product 28 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/sky-flower-stud-earrings.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Sterling Silver Sky Flower Stud Earrings</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$60</p>
+            </a>
+
+             <!-- Product 29 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/women-stretch-popover-hoodie-black.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Women's Stretch Popover Hoodie</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$14</p>
+            </a>
+
+             <!-- Product 30 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/bathroom-rug.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Bathroom Bath Rug Mat</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$68</p>
+            </a>
+
+             <!-- Product 31 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/women-knit-ballet-flat-black.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Women's Knit Ballet Flat</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$41</p>
+            </a>
+
+             <!-- Product 32 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/men-golf-polo-t-shirt-blue.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Men's Regular-Fit Quick-Dry Golf Polo Shirt</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$75</p>
+            </a>
+
+             <!-- Product 33 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/trash-can-with-foot-pedal-50-liter.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Trash Can with Foot Pedal - Brushed Stainless Steel</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$84</p>
+            </a>
+
+             <!-- Product 34 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/duvet-cover-set-blue-twin.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Duvet Cover Set with Zipper Closuref</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$72</p>
+            </a>
+
+             <!-- Product 35-->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/women-chunky-beanie-gray.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Women's Chunky Cable Beanie</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$53</p>
+            </a>
+
+             <!-- Product 36 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/men-chino-pants-beige.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Men's Classic-fit Pleated Chino Pants</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$17</p>
+            </a>
+
+             <!-- Product 37 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/men-athletic-shoes-green.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Men's Athletic Sneaker</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$74</p>
+            </a>
+
+             <!-- Product 38-->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/men-navigator-sunglasses-brown.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Men's Navigator Sunglasses Pilot</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$30</p>
+            </a>
+
+             <!-- Product 39 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/non-stick-cooking-set-15-pieces.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Non-Stick Cookware Set, Pots, Pans and Utensils - 15 Pieces</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$60</p>
+            </a>
+
+             <!-- Product 40 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/vanity-mirror-silver.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Vanity Mirror with Heavy Base - Chrome</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$100</p>
+            </a>
+
+             <!-- Product 41 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/women-french-terry-fleece-jogger-camo.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Women's Fleece Jogger Sweatpant</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$45</p>
+            </a>
+
+             <!-- Product 42 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/double-elongated-twist-french-wire-earrings.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Double Oval Twist French Wire Earrings</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$34</p>
+            </a>
+
+             <!-- Product 43 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/round-airtight-food-storage-containers.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Round Airtight Food Storage Containers</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$11</p>
+            </a>
+
+             <!-- Product 44 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/coffeemaker-with-glass-carafe-black.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Coffeemaker with Glass Carafe and Reusable Filter - 25 Oz, Black</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$8</p>
+            </a>
+
+             <!-- Product 45 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/blackout-curtains-black.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Blackout Curtains Set 42 x 84-Inch - Black, 2 Panels</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$51</p>
+            </a>
+
+             <!-- Product 46 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/cotton-bath-towels-teal.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">100% Cotton Bath Towels - 2 Pack, Light Teal</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$20</p>
+            </a>
+
+             <!-- Product 47-->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/knit-athletic-sneakers-pink.webp" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">Waterproof Knit Athletic Sneakers - Pink</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$100</p>
+            </a>
+
+             <!-- Product 48 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/countertop-blender-64-oz.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">../Countertop Blender - 64oz, 1400 Watts</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$90</p>
+            </a>
+
+             <!-- Product 49 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/floral-mixing-bowl-set.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">10-Piece Mixing Bowl Set with Lids - Floral</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$76</p>
+            </a>
+
+             <!-- Product 50 -->
+         <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+            <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <img src="../images/products/kitchen-paper-towels-30-pack.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
+            <h3 class="mt-4 text-sm text-gray-700">2-Ply Kitchen Paper Towels - 30 Pack</h3>
+            <p class="mt-1 text-lg font-medium text-gray-900">$200</p>
+            </a>
+
+            <a href="#" class="group" onclick="openModal('Silk Scarf', 60)">
+                <div onclick="openModal('Silk Scarf', 60)" class="aspect-h-1 group aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                    <img src="../images/products/men-cozy-fleece-zip-up-hoodie-red.jpg" alt="Silk Scarf" class="h-full w-full object-cover object-center group-hover:opacity-75">
+                </div>
+                <h3 class="mt-4 text-sm text-gray-700">Men's Full-Zip Hooded Fleece Sweatshirt</h3>
+                <p class="mt-1 text-lg font-medium text-gray-900">$100</p>
+                </a>
+    </div>
+    </div>
+</div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 hidden z-10 bg-gray-500 bg-opacity-75 transition-opacity">
+    <div class="fixed inset-0 z-20 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
+        <div class="relative flex w-full transform bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:max-w-2xl lg:max-w-4xl">
+        <button type="button" onclick="closeModal()" class="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8">
+            <span class="sr-only">Close</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <div class="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
+            <div class="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
+              <img src="https://tailwindui.com/plus/img/ecommerce-images/product-quick-preview-02-detail.jpg" alt="Two each of gray, white, and black shirts arranged on table." class="object-cover object-center">
+            </div>
+            <div class="sm:col-span-8 lg:col-span-7">
+              <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">Basic Tee 6-Pack</h2>
+
+              <section aria-labelledby="information-heading" class="mt-2">
+                <h3 id="information-heading" class="sr-only">Product information</h3>
+
+                <p class="text-2xl text-gray-900">$192</p>
+
+                <!-- Reviews -->
+                <div class="mt-6">
+                  <h4 class="sr-only">Reviews</h4>
+                  <div class="flex items-center">
+                    <div class="flex items-center">
+                    
+                      <svg class="size-5 shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="size-5 shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="size-5 shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="size-5 shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="size-5 shrink-0 text-gray-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <p class="sr-only">3.9 out of 5 stars</p>
+                    <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
+                  </div>
+                </div>
+              </section>
+
+              <section aria-labelledby="options-heading" class="mt-10">
+                <h3 id="options-heading" class="sr-only">Product options</h3>
+
+                <form>
+                  
+                  <fieldset aria-label="Choose a color">
+                    <legend class="text-sm font-medium text-gray-900">Color</legend>
+
+                    <div class="mt-4 flex items-center space-x-3">
+                    
+                      <label aria-label="White" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-400 focus:outline-none">
+                        <input type="radio" name="color-choice" value="White" class="sr-only">
+                        <span aria-hidden="true" class="size-8 rounded-full border border-black/10 bg-white"></span>
+                      </label>
+                    
+                      <label aria-label="Gray" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-400 focus:outline-none">
+                        <input type="radio" name="color-choice" value="Gray" class="sr-only">
+                        <span aria-hidden="true" class="size-8 rounded-full border border-black/10 bg-gray-200"></span>
+                      </label>
+                     
+                      <label aria-label="Black" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-900 focus:outline-none">
+                        <input type="radio" name="color-choice" value="Black" class="sr-only">
+                        <span aria-hidden="true" class="size-8 rounded-full border border-black/10 bg-gray-900"></span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  
+                  <fieldset class="mt-10" aria-label="Choose a size">
+                    <div class="flex items-center justify-between">
+                      <div class="text-sm font-medium text-gray-900">Size</div>
+                      <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Size guide</a>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-4 gap-4">
+                    
+                      <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="XXS" class="sr-only">
+                        <span>XXS</span>
+                      
+                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
+                      </label>
+                      
+                      <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="XS" class="sr-only">
+                        <span>XS</span>
+                       
+                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
+                      </label>
+                   
+                      <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="S" class="sr-only">
+                        <span>S</span>
+                      
+                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
+                      </label>
+                     
+                      
+                      <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="M" class="sr-only">
+                        <span>M</span>
+                       
+                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
+                      </label>
+                     
+                      <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="L" class="sr-only">
+                        <span>L</span>
+                       
+                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
+                      </label>
+                      
+                      <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="XL" class="sr-only">
+                        <span>XL</span>
+                       
+                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
+                      </label>
+                      <!-- Active: "ring-2 ring-indigo-500" -->
+                      <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="XXL" class="sr-only">
+                        <span>XXL</span>
+                        <!--
+                          Active: "border", Not Active: "border-2"
+                          Checked: "border-indigo-500", Not Checked: "border-transparent"
+                        -->
+                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
+                      </label>
+                      <!-- Active: "ring-2 ring-indigo-500" -->
+                      <label class="group relative flex cursor-not-allowed items-center justify-center rounded-md border bg-gray-50 px-4 py-3 text-sm font-medium uppercase text-gray-200 hover:bg-gray-50 focus:outline-none sm:flex-1">
+                        <input type="radio" name="size-choice" value="XXXL" disabled class="sr-only">
+                        <span>XXXL</span>
+                        <span aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
+                          <svg class="absolute inset-0 size-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
+                            <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
+                          </svg>
+                        </span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <button type="submit" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to bag</button>
+                </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="animate-bounce" id="backToTop" onclick="scrollToTop()" title="Go to top">↑</button>
+
+          
+   
+<script>
+    // JavaScript for Modal
+    function openModal(name, price) {
+    document.getElementById('modal').classList.remove('hidden');
+    document.getElementById('product-name').textContent = name;
+    document.getElementById('product-price').textContent = `$${price}`;
+    }
+
+    function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+const form = document.getElementById('productForm');
+let selectedColor = '';
+let selectedSize = '';
+
+// Handle color selection
+document.querySelectorAll('.color-option input').forEach(input => {
+input.addEventListener('change', function () {
+selectedColor = this.value;
+console.log('Selected color:', selectedColor);
+});
+});
+
+// Handle size selection
+document.querySelectorAll('.size-option input').forEach(input => {
+input.addEventListener('change', function () {
+selectedSize = this.value;
+console.log('Selected size:', selectedSize);
+});
+});
+
+// Form submit handler
+form.addEventListener('submit', function (event) {
+event.preventDefault();
+if (!selectedColor || !selectedSize) {
+alert('Please select both color and size.');
+return;
+}
+console.log(`Adding to bag: Color - ${selectedColor}, Size - ${selectedSize}`);
+// Handle add to bag logic here
+});
+});
+</script> 
+        
+</body>
+</html>
+
+

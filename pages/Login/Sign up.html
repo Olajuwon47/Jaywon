@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+      /* BeatFade Animation */
+      @keyframes beatFade {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.7; }
+      }
+    
+      /* Animation Class */
+      .beatFade {
+        animation: beatFade 1.5s infinite;
+        transition: color 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex min-h-full flex-col bg-lime-500 justify-center px-6 py-12 lg:px-8">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">Sign Up</h2>
+      </div>
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form class="space-y-6" id="auth-form" action="#" method="POST">
+        <div id="username-field">
+          <label class="block text-sm font-medium text-gray-900">Username</label>
+          <div class="relative mt-2">
+            <ion-icon name="person-outline" class="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400"></ion-icon>
+            <input type="text" required class="pl-10 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-900">Email</label>
+          <div class="relative mt-2">
+            <ion-icon name="mail-outline" class="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400"></ion-icon>
+            <input type="email" required class="pl-10 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-900">Password</label>
+          <div class="relative mt-2">
+            <ion-icon name="lock-closed-outline" class="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400"></ion-icon>
+            <input type="password" required class="pl-10 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+            <button type="button" class="absolute inset-y-0 right-3 flex items-center text-gray-400 focus:outline-none">
+              <ion-icon name="eye-off-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <div id="confirm-password-field">
+          <label class="block text-sm font-medium text-gray-900">Confirm Password</label>
+          <div class="relative mt-2">
+            <ion-icon name="lock-closed-outline" class="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400"></ion-icon>
+            <input type="password" required class="pl-10 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+            <button type="button" class="absolute inset-y-0 right-3 flex items-center text-gray-400 focus:outline-none">
+              <ion-icon name="eye-off-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit"  id="submit-btn" class="flex w-full justify-center rounded-md bg-emerald-400 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-950 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600">Sign Up</button>
+         
+          <p class="text-center text-sm text-gray-950">
+            <span id="toggle-text">Already have an account?</span> <a href="../Login/Login.html" id="toggle-link" class="text-gray-950 hover:text-slate-50 font-semibold" onclick="toggleForm()">Sign in</a></p>
+      </form>
+
+      <div class="mt-8 flex justify-center space-x-6">
+           <!-- Social Auth Links -->
+          <a id="googleAuth" href="https://accounts.google.com/signup" class="text-slate-700 hover:text-gray-950">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 13.5L2 6V18H22V6L12 13.5ZM12 11L2 4H22L12 11Z" />
+            </svg>
+          </a>
+          
+          <a id="facebookAuth" href="https://www.facebook.com/signup" class="text-slate-700 hover:text-gray-950">
+            <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" fill="currentColor" viewBox="0 0 512 512">
+              <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/>
+            </svg>
+          </a>
+          
+          <a id="instagramAuth" href="https://www.instagram.com/accounts/signup" class="text-slate-700 hover:text-gray-950">
+            <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" fill="currentColor" viewBox="0 0 448 512">
+              <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8z"/>
+            </svg>
+          </a>
+          
+          <a id="twitterAuth" href="https://twitter.com/signup" class="text-slate-700 hover:text-gray-950">
+            <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 512 512">
+              <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
+            </svg>
+          </a>      
+      </div>
+    </div>
+
+    <script>
+
+        let isSignIn = true;
+
+        function toggleAuthMode() {
+          isSignIn = !isSignIn;
+          document.getElementById("authModeText").textContent = isSignIn ? "Sign In" : "Sign Up";
+          
+          // Update URLs based on sign-in or sign-up mode
+          document.getElementById("googleAuth").href = isSignIn ? "https://accounts.google.com/signin" : "https://accounts.google.com/signup";
+          document.getElementById("facebookAuth").href = isSignIn ? "https://www.facebook.com/login" : "https://www.facebook.com/r.php";
+          document.getElementById("instagramAuth").href = isSignIn ? "https://www.instagram.com/accounts/login" : "https://www.instagram.com/accounts/emailsignup";
+          document.getElementById("twitterAuth").href = isSignIn ? "https://twitter.com/login" : "https://twitter.com/i/flow/signup";
+        }
+      function toggleForm() {
+        const formTitle = document.getElementById("form-title");
+        const submitBtn = document.getElementById("submit-btn");
+        const toggleText = document.getElementById("toggle-text");
+        const toggleLink = document.getElementById("toggle-link");
+        const usernameField = document.getElementById("username-field");
+        const confirmPasswordField = document.getElementById("confirm-password-field");
+  
+        if (formTitle.textContent === "Sign Up") {
+          // Switch to Sign In
+          formTitle.textContent = "Sign In";
+          submitBtn.textContent = "Sign In";
+          toggleText.textContent = "Don't have an account?";
+          toggleLink.textContent = "Sign up";
+          usernameField.style.display = "none";
+          confirmPasswordField.style.display = "none";
+        } else {
+          // Switch to Sign Up
+          formTitle.textContent = "Sign Up";
+          submitBtn.textContent = "Sign Up";
+          toggleText.textContent = "Already have an account?";
+          toggleLink.textContent = "Sign in";
+          usernameField.style.display = "block";
+          confirmPasswordField.style.display = "block";
+        }
+      }
+    </script>
+  
+  </body>
+</html>
+
+

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="../src/input.css" rel="stylesheet">
+    <style rel="stylesheet" src="../src/input.css"></style>
+  </head>
+  <body>
+    <header class="relative bg-white">
+       <p class="flex h-10 items-center justify-center bg-teal-800 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">Get free delivery on orders over $100</p>
+      <nav class="bg-teal-900">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              onclick="toggleMenu()"
+              id="mobile-menu-button"
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!-- Icon when menu is closed -->
+              <svg
+                class="block h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+              <!-- Icon when menu is open -->
+              <svg
+                class="hidden h-6 w-6"
+                fill="none"
+                viewBox="0 0 0 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+            </div>
+            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div class="flex shrink-0 items-center">
+                <img class="h-10 w-auto" src="../images/jaywon 1.jpg" alt="Jaywon Wears">
+              </div>              
+              <div class="hidden sm:ml-6 sm:block">
+                <div class="flex space-x-4">                                        
+                  <a href="../pages/Store.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Stores</a>
+                  <a href="../pages/orders.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Orders</a>
+                  <a href="../pages/tracking.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Track package</a>
+                  <a href="../pages/Team.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
+                  <a href="../pages/checkout.html" class="group -m-2 flex items-center p-2">
+                    <!-- Cart icon -->
+                    <img src="../images/icons/cart-icon.png" alt="Cart" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
+                    
+                    <!-- Item count -->
+                    <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                    <span class="sr-only">items in cart, view bag</span>
+                  </a>
+                  
+                    <!-- Search Button -->
+                    <a href="#" class="p-2 text-gray-400 hover:text-gray-500" onclick="toggleSearch()">
+                      <span class="sr-only">Search</span>
+                      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                      </svg>
+                    </a>
+
+                    <!-- Search Form (hidden by default) -->
+                    <div id="search-container" class="hidden">
+                      <input type="text" id="search-input" class="p-2 border rounded" placeholder="Search..." onkeyup="searchFunction(event)">
+                    </div>                     
+                </div>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">             
+              <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" onclick="toggleNotifications()">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">View notifications</span>
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                </svg>
+              </button>
+              <!-- Notification Dropdown Panel -->
+              <div id="notificationPanel" class="hidden absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md p-4">
+                <p class="text-gray-700">You have new notifications!</p>
+              </div>
+                            
+              <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <div>
+                <button
+                  type="button"
+                  class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  onclick="toggleDropdown()"
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  />
+                </button>
+              </div>
+
+              <!-- Dropdown menu -->
+              <div
+                id="dropdown-menu"
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-0"
+                >Your Profile</a>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-1"
+                >Settings</a>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-2"
+                >Sign out</a>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="sm:hidden" id="mobile-menu">
+          <div class="space-y-1 px-2 pb-3 pt-2">
+             <!-- Search Button -->
+             <a href="#" class="p-2 text-gray-400 hover:text-gray-500" onclick="toggleSearch()">
+              <span class="sr-only">Search</span>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+            </a>
+            <!-- Search Form (hidden by default) -->
+            <div id="search-container" class="hidden">
+              <input type="text" id="search-input" class="p-2 border rounded" placeholder="Search..." onkeyup="searchFunction(event)">
+            </div>
+            <a href="../pages/Store.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Stores</a>
+                  <a href="../pages/orders.html" class=" block rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Orders</a>
+                  <a href="../pages/tracking.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Track package</a>
+                  <a href="../pages/Team.html" class=" block rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
+                  <a href="../pages/checkout.html" class="group -m-2 flex items-center p-2">
+                    <!-- Cart icon -->
+                    <img src="../images/icons/cart-icon.png" alt="Cart" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
+                    
+                    <!-- Item count -->
+                    <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                    <span class="sr-only">items in cart, view bag</span>
+                  </a>                                      
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <div class="relative overflow-hidden bg-white">
+      <div class="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
+        <div class="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+          <div class="sm:max-w-lg">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Summer styles are finally here</h1>
+            <p class="mt-4 text-xl text-gray-500">This year, our new summer collection will shelter you from the harsh elements of a world that doesn't care if you live or die.</p>
+          </div>
+          <div>
+            <div class="mt-10">
+              <!-- Decorative image grid -->
+              <div aria-hidden="true" class="pointer-events-none lg:absolute lg:inset-y-0 lg:mx-auto lg:w-full lg:max-w-7xl">
+                <div class="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
+                  <div class="flex items-center space-x-6 lg:space-x-8">
+                    <div class="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                      <div class="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
+                        <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg" alt="" class="h-full w-full object-cover object-center">
+                      </div>
+                      <div class="h-64 w-44 overflow-hidden rounded-lg">
+                        <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg" alt="" class="h-full w-full object-cover object-center">
+                      </div>
+                    </div>
+                    <div class="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                      <div class="h-64 w-44 overflow-hidden rounded-lg">
+                        <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg" alt="" class="h-full w-full object-cover object-center">
+                      </div>
+                      <div class="h-64 w-44 overflow-hidden rounded-lg">
+                        <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg" alt="" class="h-full w-full object-cover object-center">
+                      </div>
+                      <div class="h-64 w-44 overflow-hidden rounded-lg">
+                        <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg" alt="" class="h-full w-full object-cover object-center">
+                      </div>
+                    </div>
+                    <div class="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                      <div class="h-64 w-44 overflow-hidden rounded-lg">
+                        <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg" alt="" class="h-full w-full object-cover object-center">
+                      </div>
+                      <div class="h-64 w-44 overflow-hidden rounded-lg">
+                        <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg" alt="" class="h-full w-full object-cover object-center">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+              <a href="#" class="inline-block rounded-md border border-transparent bg-teal-600 px-8 py-3 text-center font-medium text-white hover:bg-teal-00">Shop Collection</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative isolate overflow-hidden bg-lime-500 py-16 sm:py-24 lg:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+          <div class="max-w-xl lg:max-w-lg">
+            <h2 class="text-4xl font-semibold tracking-tight text-black">Subscribe to our newsletter</h2>
+            <p class="mt-4 text-lg text-black">Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing velit quis. Duis tempor incididunt dolore.</p>
+            
+            <!-- Form begins here -->
+            <form id="newsletter-form" class="mt-6 flex max-w-md gap-x-4" onsubmit="subscribe(event)">
+              <label for="email-address" class="sr-only">Email address</label>
+              <input id="email-address" name="email" type="email" autocomplete="email" required class="min-w-0 flex-auto rounded-md border-0 bg-black px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm/6" placeholder="Enter your email">
+              <button type="submit" class="flex-none rounded-md bg-lime-700 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-950">Subscribe</button>
+            </form>
+            <!-- Form ends here -->
+    
+          </div>
+    
+          <dl class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
+            <!-- Feature items -->
+            <div class="flex flex-col items-start">
+              <div class="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
+                <svg class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                </svg>
+              </div>
+              <dt class="mt-4 text-base font-semibold text-black">Weekly articles</dt>
+              <dd class="mt-2 text-base/7 text-black">Non laboris consequat cupidatat laborum magna. Eiusmod non irure cupidatat duis commodo amet.</dd>
+            </div>
+            <div class="flex flex-col items-start">
+              <div class="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
+                <svg class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 0 1 3.15 0V15M6.9 7.575a1.575 1.575 0 1 0-3.15 0v8.175a6.75 6.75 0 0 0 6.75 6.75h2.018a5.25 5.25 0 0 0 3.712-1.538l1.732-1.732a5.25 5.25 0 0 0 1.538-3.712l.003-2.024a.668.668 0 0 1 .198-.471 1.575 1.575 0 1 0-2.228-2.228 3.818 3.818 0 0 0-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0 1 16.35 15m.002 0h-.002" />
+                </svg>
+              </div>
+              <dt class="mt-4 text-base font-semibold text-black">No spam</dt>
+              <dd class="mt-2 text-base/7 text-black">Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6" aria-hidden="true">
+        <div class="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+      </div>
+    </div>
+
+    <div class="isolate bg-lime-200 px-4 py-12 sm:py-16 lg:px-6 h-auto">
+      <div class="mx-auto max-w-lg text-center">
+        <h2 class="text-balance text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Message Us</h2>
+      </div>
+      <form class="mx-auto mt-10 max-w-md sm:mt-12">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="email" class="block text-sm font-semibold text-gray-900">Email</label>
+            <div class="mt-1.5">
+              <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-offset-lime-950 sm:text-sm">
+            </div>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="message" class="block text-sm font-semibold text-gray-900">Message</label>
+            <div class="mt-1.5">
+              <textarea name="message" id="message" rows="3" class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-950 sm:text-sm"></textarea>
+            </div>
+          </div>
+          <div class="flex gap-x-2 sm:col-span-2">
+            <button type="button" class="flex h-5 w-5 cursor-pointer rounded-full bg-gray-200 ring-1 ring-gray-900/5" role="switch" aria-checked="false" aria-labelledby="switch-1-label"></button>
+            <label class="text-sm text-gray-600" id="switch-1-label">By selecting this, you agree to our <a href="#" class="font-semibold text-indigo-600">privacy policy</a>.</label>
+          </div>
+          <div class="mt-8">
+            <button type="submit" class="block w-full rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white hover:bg-lime-950">Let's talk</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+
+    <footer class="bg-lime-800 text-gray-950 p-8 w-100 h-auto">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <input type="checkbox" class="hidden" checked>
+          <h1 class="text-lg font-semibold text-gray-950 mb-3">Features</h1>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">About</a></li>
+            <li><a href="#" class="hover:text-white">Terms</a></li>
+            <li><a href="#" class="hover:text-white">Partners</a></li>
+            <li><a href="#" class="hover:text-white">Updates</a></li>
+          </ul>
+        </div>
+        <div>
+          <input type="checkbox" class="hidden" checked>
+          <h1 class="text-lg font-semibold text-gray-200 mb-3">Details</h1>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">Specs</a></li>
+            <li><a href="#" class="hover:text-white">Tools</a></li>
+            <li><a href="#" class="hover:text-white">Resources</a></li>
+          </ul>
+        </div>
+        <div>
+          <input type="checkbox" class="hidden" checked>
+          <h1 class="text-lg font-semibold text-gray-200 mb-3">Technology</h1>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">How it works</a></li>
+            <li><a href="#" class="hover:text-white">Patterns</a></li>
+            <li><a href="#" class="hover:text-white">Usage</a></li>
+            <li><a href="#" class="hover:text-white">Products</a></li>
+            <li><a href="#" class="hover:text-white">Contracts</a></li>
+          </ul>
+        </div>
+        <div>
+          <input type="checkbox" class="hidden" checked>
+          <h1 class="text-lg font-semibold text-gray-200 mb-3">FAQ</h1>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">Questions</a></li>
+            <li><a href="#" class="hover:text-white">Answers</a></li>
+            <li><a href="#" class="hover:text-white">Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="mt-8 flex flex-wrap justify-center space-x-6">
+        <a href="https://facebook.com" class="text-gray-400 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" class="fill-current beatFade" viewBox="0 0 512 512">
+            <path fill="#050505" d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/>
+          </svg>
+          Facebook
+        </a>
+        <a href="https://instagram.com/mrmrs_" class="text-gray-400 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" class="fill-current beatFade" viewBox="0 0 448 512">
+            <path fill="#111212" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8z"/>
+          </svg>
+          Instagram
+        </a>
+        <a href="https://youtube.com" class="text-gray-400 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" class="fill-current beatFade" viewBox="0 0 576 512">
+            <path fill="#0d0d0d" d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/>
+          </svg>
+          YouTube
+        </a>
+        <a href="https://twitter.com/mrmrs_" class="text-gray-400 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" class="fill-current beatFade" viewBox="0 0 512 512">
+            <path fill="#080808" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
+          </svg>
+          Twitter
+        </a>
+      </div>
+    
+      <div class="mt-8 text-center">
+        <p>&copy; 2024 Fashion House . All rights reserved.</p>
+        <nav class="mt-4 space-x-4">
+          <a href="#" class="hover:text-white">Privacy Policy</a>
+          <a href="#" class="hover:text-white">Terms of Service</a>
+          <a href="#" class="hover:text-white">Support</a>
+        </nav>
+      </div>
+    </footer>
+
+    <button class="animate-bounce" id="backToTop" onclick="scrollToTop()" title="Go to top">↑</button>
+
+
+    
+    <script src="../script/script1.js"></script>   
+  </body>
+</html>
+
+
+

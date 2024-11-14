@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Order History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input[type="text"], input[type="number"] {
+      padding: 5px;
+      margin: 5px 0;
+      width: 100%;
+    }
+    button {
+      padding: 8px 12px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header class="relative bg-white">
+    <p class="flex h-10 items-center justify-center bg-teal-800 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">Get free delivery on orders over $100</p>
+   <nav class="bg-teal-900">
+     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+       <div class="relative flex h-16 items-center justify-between">
+         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+         <button
+           type="button"
+           class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+           aria-controls="mobile-menu"
+           aria-expanded="false"
+           onclick="toggleMenu()"
+           id="mobile-menu-button"
+         >
+           <span class="absolute -inset-0.5"></span>
+           <span class="sr-only">Open main menu</span>
+           <!-- Icon when menu is closed -->
+           <svg
+             class="block h-6 w-6"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke-width="1.5"
+             stroke="currentColor"
+             aria-hidden="true"
+           >
+             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+           </svg>
+           <!-- Icon when menu is open -->
+           <svg
+             class="hidden h-6 w-6"
+             fill="none"
+             viewBox="0 0 0 24"
+             stroke-width="1.5"
+             stroke="currentColor"
+             aria-hidden="true"
+           >
+             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+           </svg>
+         </button>
+         </div>
+         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+           <div class="flex shrink-0 items-center">
+             <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Jaywon Wears">
+           </div>              
+           <div class="hidden sm:ml-6 sm:block">
+             <div class="flex space-x-4">                                        
+               <a href="../pages/Store.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Stores</a>
+               <a href="../pages/orders.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Orders</a>
+               <a href="../pages/tracking.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Track package</a>
+               <a href="../pages/Team.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
+               <a href="../pages/checkout.html" class="group -m-2 flex items-center p-2">
+                 <!-- Cart icon -->
+                 <img src="../images/icons/cart-icon.png" alt="Cart" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
+                 
+                 <!-- Item count -->
+                 <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                 <span class="sr-only">items in cart, view bag</span>
+               </a>
+               
+                 <!-- Search Button -->
+                 <a href="#" class="p-2 text-gray-400 hover:text-gray-500" onclick="toggleSearch()">
+                   <span class="sr-only">Search</span>
+                   <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                   </svg>
+                 </a>
+
+                 <!-- Search Form (hidden by default) -->
+                 <div id="search-container" class="hidden">
+                   <input type="text" id="search-input" class="p-2 border rounded" placeholder="Search..." onkeyup="searchFunction(event)">
+                 </div>                     
+             </div>
+           </div>
+         </div>
+         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">             
+           <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" onclick="toggleNotifications()">
+             <span class="absolute -inset-1.5"></span>
+             <span class="sr-only">View notifications</span>
+             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+             </svg>
+           </button>
+           <!-- Notification Dropdown Panel -->
+           <div id="notificationPanel" class="hidden absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md p-4">
+             <p class="text-gray-700">You have new notifications!</p>
+           </div>
+                         
+           <!-- Profile dropdown -->
+         <div class="relative ml-3">
+           <div>
+             <button
+               type="button"
+               class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+               id="user-menu-button"
+               aria-expanded="false"
+               aria-haspopup="true"
+               onclick="toggleDropdown()"
+             >
+               <span class="absolute -inset-1.5"></span>
+               <span class="sr-only">Open user menu</span>
+               <img
+                 class="h-8 w-8 rounded-full"
+                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                 alt=""
+               />
+             </button>
+           </div>
+
+           <!-- Dropdown menu -->
+           <div
+             id="dropdown-menu"
+             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+             role="menu"
+             aria-orientation="vertical"
+             aria-labelledby="user-menu-button"
+             tabindex="-1"
+           >
+             <a
+               href="#"
+               class="block px-4 py-2 text-sm text-gray-700"
+               role="menuitem"
+               tabindex="-1"
+               id="user-menu-item-0"
+             >Your Profile</a>
+             <a
+               href="#"
+               class="block px-4 py-2 text-sm text-gray-700"
+               role="menuitem"
+               tabindex="-1"
+               id="user-menu-item-1"
+             >Settings</a>
+             <a
+               href="#"
+               class="block px-4 py-2 text-sm text-gray-700"
+               role="menuitem"
+               tabindex="-1"
+               id="user-menu-item-2"
+             >Sign out</a>
+           </div>
+         </div>
+         </div>
+       </div>
+     </div>
+   
+     <!-- Mobile menu, show/hide based on menu state. -->
+     <div class="sm:hidden" id="mobile-menu">
+       <div class="space-y-1 px-2 pb-3 pt-2">
+          <!-- Search Button -->
+          <a href="#" class="p-2 text-gray-400 hover:text-gray-500" onclick="toggleSearch()">
+           <span class="sr-only">Search</span>
+           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+           </svg>
+         </a>
+         <!-- Search Form (hidden by default) -->
+         <div id="search-container" class="hidden">
+           <input type="text" id="search-input" class="p-2 border rounded" placeholder="Search..." onkeyup="searchFunction(event)">
+         </div>
+         <a href="../pages/Store.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Stores</a>
+               <a href="../pages/orders.html" class=" block rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Orders</a>
+               <a href="../pages/tracking.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Track package</a>
+               <a href="../pages/Team.html" class=" block rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
+               <a href="../pages/checkout.html" class="group -m-2 flex items-center p-2">
+                 <!-- Cart icon -->
+                 <img src="../images/icons/cart-icon.png" alt="Cart" class="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
+                 
+                 <!-- Item count -->
+                 <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                 <span class="sr-only">items in cart, view bag</span>
+               </a>                                      
+       </div>
+     </div>
+   </nav>
+ </header>
+  <h2>Shopping Order History</h2>
+
+  <div>
+    <h3>Add New Order</h3>
+    <label for="orderID">Order ID:</label>
+    <input type="text" id="orderID" placeholder="Enter Order ID">
+
+    <label for="orderDate">Date:</label>
+    <input type="text" id="orderDate" placeholder="YYYY-MM-DD">
+
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" placeholder="Enter Item Name">
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" min="1" placeholder="Enter Quantity">
+
+    <label for="totalPrice">Total Price:</label>
+    <input type="number" id="totalPrice" min="0" placeholder="Enter Total Price">
+
+    <button onclick="addOrder()">Add Order</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody id="orderTable">
+      <!-- Orders will be appended here dynamically -->
+    </tbody>
+  </table>
+
+  <script>
+    const orderTable = document.getElementById('orderTable');
+
+    function addOrder() {
+      const orderID = document.getElementById('orderID').value;
+      const orderDate = document.getElementById('orderDate').value;
+      const itemName = document.getElementById('itemName').value;
+      const quantity = document.getElementById('quantity').value;
+      const totalPrice = document.getElementById('totalPrice').value;
+
+      if (orderID && orderDate && itemName && quantity && totalPrice) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${orderID}</td>
+          <td>${orderDate}</td>
+          <td>${itemName}</td>
+          <td>${quantity}</td>
+          <td>${totalPrice}</td>
+        `;
+        orderTable.appendChild(row);
+
+        // Clear input fields after adding the order
+        document.getElementById('orderID').value = '';
+        document.getElementById('orderDate').value = '';
+        document.getElementById('itemName').value = '';
+        document.getElementById('quantity').value = '';
+        document.getElementById('totalPrice').value = '';
+      } else {
+        alert('Please fill in all fields to add an order.');
+      }
+    }
+  </script>
+</body>
+</html>
